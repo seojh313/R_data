@@ -85,7 +85,7 @@ while(TRUE) {
   }
   
   # 각도를 점차 낮춤 (ex: x값이 커질수록 각도를 작게)
-  angle = angle + 2  # 각도를 1도씩 줄여나감
+  angle = angle + 2  # 각도를 2도씩 줄여나감
   
   # 현재 화살의 회전 적용
   arrow_rotated = image_rotate(image_background(arrow, "none"), angle)
