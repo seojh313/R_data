@@ -70,10 +70,11 @@ while(TRUE){
 
 # 초기 설정
 x = 0
-y = 190
+y = 150
 y_min = 100  # y축 최소값 (최저점)
 x_max = 400  # x축 최대값
 x_mid = x_max / 2  # 포물선의 중간 지점
+angle = -11  # 초기 화살 각도
 
 while(TRUE) {
   # x가 중간 지점(x_mid)까지는 y를 감소시키고, 그 이후로는 증가시킴
@@ -83,11 +84,20 @@ while(TRUE) {
     y = y + 10  # 중간 지점 이후 y값 증가
   }
   
-  position = geometry_point(x, y)  # x, y 포인트 위치 계산
+  # 각도를 점차 낮춤 (ex: x값이 커질수록 각도를 작게)
+  angle = angle + 2  # 각도를 1도씩 줄여나감
   
-  img = image_composite(bg2, arrow, offset = position)  # 화살 이미지 배치
+  # 현재 화살의 회전 적용
+  arrow_rotated = image_rotate(image_background(arrow, "none"), angle)
   
-  print(img)  # 현재 이미지 출력
+  # 위치 계산
+  position = geometry_point(x, y)
+  
+  # 이미지 합성
+  img = image_composite(bg2, arrow_rotated, offset = position)
+  
+  # 현재 이미지 출력
+  print(img)
   
   Sys.sleep(0.1)  # 일정 시간 대기
   
@@ -98,4 +108,3 @@ while(TRUE) {
   # x 값을 20씩 증가시키며 이동
   x = x + 20
 }
-
